@@ -1,0 +1,489 @@
+//*************** Variables ***************
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700&display=swap');
+
+$primaryLigth: #edf2fb;
+$primaryDark: #5465ff;
+$primaryText: #393d3f;
+
+$secondaryLigth: #d7e3fc;
+$secondaryDark: #abc4ff;
+
+$ourWhite: #ffffff;
+$ourBlack: #000000;
+
+//*************** Reset ***************
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Raleway', sans-serif;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: $primaryLigth;
+}
+::-webkit-scrollbar-thumb {
+    background-color: $primaryDark;
+}
+
+
+//*************** Mixins breackpoints ***************
+
+@mixin mobile {
+    @media screen and (max-width: 480px){
+        @content;
+    }
+}
+@mixin tablet {
+    @media screen and (max-width: 768px){
+        @content;
+    }
+}
+@mixin laptop {
+    @media screen and (max-width: 1200px){
+        @content;
+    }
+}
+
+//*************** Register / login page styles ***************
+.register, .login{
+    display: flex;
+    background-color: $primaryLigth;
+    @include tablet{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    
+    .form_container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 30px;
+        background-color: $ourWhite;
+        width: 45%;
+        @include tablet{
+            width: 100%;
+            height: 100%;
+            padding: 0;
+        }
+    
+        .form_wrapper{
+            height: 100%;
+            padding: 25px 35px;
+            border-radius: 15px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+    
+            .logo{
+                color: $primaryDark;
+                font-weight: 600;
+                font-size: 30px;
+    
+                @include tablet{
+                    display: none;
+                }
+            }
+            .title{
+                color: $secondaryDark;
+                font-size: 20px;
+            }
+            form{
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+                margin-top: 20px;
+    
+                input{
+                    padding: 15px;
+                    border: none;
+                    border-bottom: 1px solid $primaryDark;
+                    outline: none;
+                    width: 300px;
+                }
+                label{
+                    text-align: left;
+                    cursor: pointer;
+                }
+                button{
+                    background-color: $primaryDark;
+                    color: #ffffff;
+                    padding: 10px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    border: none;
+                    opacity: 0.8;
+                    transition: .1s all ease-in-out;
+                    border-radius: 5px;
+                    margin: 10px 0;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 10px;
+                    transition: all .3s ease-in-out;
+                    .loading{
+                        display: none;
+                        justify-content: center;
+                    }
+                    .loading:after{
+                        content: "";
+                        width: 15px;
+                        height: 15px;
+                        border: 3px solid $secondaryDark;
+                        border-top-color: $ourWhite;
+                        border-radius: 50%;
+                        animation: loading 1s linear infinite;
+                    }
+                    .loading.active{
+                        display: flex;
+                    }
+
+                    @keyframes loading {
+                        to{
+                            transform: rotate(1turn);
+                        }
+                    }
+                }
+                button:hover{
+                    opacity: 1;
+                }
+            }
+        }
+    }
+    .bk_image{
+        width: 65%;
+        height: 100vh;
+        background-image: url("./assets/images/register_image.jpeg");
+        background-size: cover;
+        
+        @include tablet{
+            display: none;
+        }
+        
+    }
+}
+
+
+//*************** Home page ***************
+.home{
+    background-color: $primaryLigth;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .container{
+        border: 1px solid $secondaryDark;
+        border-radius: 15px;
+        height: 80%;
+        width: 75%;
+        display: flex;
+        overflow: hidden;
+        @include tablet{
+            width: 90%;
+        }
+    }
+    .sidebar{
+        flex: 1;
+        border-right: 1px solid $secondaryDark;
+        background-color: $secondaryLigth;
+        position: relative;
+
+        .navbar{
+            background-color: $secondaryDark;
+            color: $primaryText;
+            display: flex;
+            height: 50px;
+            padding: 10px;
+            justify-content: space-between;
+            align-items: center;
+            
+            .logo{
+                font-weight: 600;
+
+                @include tablet{
+                    display: none;
+                }
+            }
+            .user{
+                display: flex;
+                gap: 10px;
+                justify-content: center;
+                align-items: center;
+
+                img{
+                    height: 24px;
+                    width: 24px;
+                    background-color: transparent;
+                    border-radius: 50%;
+                }
+
+                button{
+                    border: none;
+                    background-color: $secondaryLigth;
+                    color: $primaryText;
+                    cursor: pointer;
+                    padding: 10px 15px;
+                    transition: 0.1s all ease-in-out;
+                    @include tablet{
+                        position: absolute;
+                        bottom: 10px;
+                    }
+                }
+                button:hover{
+                    background-color: $primaryDark;
+                    color: $ourWhite;
+                }
+            }
+        }
+        .search{
+            border-bottom: 3px solid $secondaryDark;
+
+            .search_form{
+                padding: 10px;
+
+                input{
+                    background-color: transparent;
+                    border: none;
+                    color: $primaryText;
+                    outline: none;
+                }
+            }
+            
+            }
+        }
+        .user_chat{
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: $primaryText;
+            cursor: pointer;
+            transition: 0.1 all ease-in-out;
+            img{
+                height: 50px;
+                width: 50px;
+                border-radius: 50%;
+            }
+            .user_chat_info{
+                span{
+                    font-size: 18px;
+                    font-weight: 600;
+                }
+                div{
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+                    svg{
+                        font-size: 12px;
+                    }
+                }
+                p{
+                    font-size: 14px;
+                    font-weight: 400;
+                    color: $primaryText;
+                    opacity: 0.8;
+                }
+            }
+        } 
+        .user_chat:hover{
+            background-color: $primaryDark;
+            color: $primaryLigth;
+            p{
+                color: $primaryLigth;
+            }
+        }
+        .active{
+            background-color: $primaryDark;
+            color: $primaryLigth;
+            .user_chat_info p{
+                color: $primaryLigth;
+            }
+        } 
+    .chat{
+        flex: 2;
+
+        .chat_info{
+            height: 50px;
+            background-color: $primaryDark;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            color: $primaryLigth;
+            .chat_advice{
+                text-align: center;
+                width: 100%;
+                h2{
+                    font-size: 40px;
+                    text-align: center;
+                }
+                table{
+                    margin: 40px auto;
+                    text-align: left;
+                    border: 1px solid $ourWhite;
+                    background-color: $primaryDark;
+                    padding: 5px;
+                    width: 300px;
+                    tbody{
+                        overflow: scroll;
+                    }
+                    th, td{
+                        border: 1px solid $ourWhite;
+                        background-color: $secondaryDark;
+                        padding: 5px;
+                        color: $primaryText;
+                        opacity: 0.8;
+                        transition: all .1s ease-in-out;
+                        cursor: pointer;
+                    }
+                    td{
+                        display: flex;
+                        justify-content: space-between;
+                    }
+                    td:hover{
+                        opacity: 1;
+                    }
+                }
+            }
+            .chat_user{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 5px;
+                img{
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                }
+            }
+        }
+
+        .chat_icons{
+            height: 24px;
+            cursor: pointer;
+            display: flex;
+            gap: 12px;
+            font-size: 1.2rem;
+        }
+        .messages{
+            background-color: $ourWhite;
+            padding: 10px;
+            height: calc(100% - 100px);
+            overflow-y: scroll;
+              
+
+            .message{
+                display: flex;
+                gap: 20px;
+                margin-bottom: 20px;
+
+                .message_info{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    color: $primaryText;
+                    font-weight: 300;
+                    width: 60px;
+                    span{
+                        opacity: 0.8;
+                        font-size: 14px;
+                        text-align: center;
+                    }
+                    img{
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                    }
+                }
+
+                .message_content{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                    max-width: 80%;
+
+                    p{
+                        background-color: $primaryLigth;
+                        padding: 10px 20px;
+                        border-radius: 0 10px 10px 10px;
+                        max-width: max-content;
+                    }
+                    img{
+                        width: 50%;
+                    }
+                }
+                &.owner{
+                    flex-direction: row-reverse;
+
+                    .message_content{
+                        align-items: flex-end;
+                        p{
+                            background-color: $primaryDark;
+                            color: $ourWhite;
+                        }
+                    }
+
+                    
+                }
+            }
+        }
+        .input{
+            background-color: $ourWhite;
+            height: 50px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            input{
+                color: $primaryText;
+                outline: none;
+                border: none;
+                
+                width: 100%;
+                font-size: 18px;
+            }
+            input::placeholder{
+                color: $primaryText;
+                opacity: 0.6;
+            }
+
+            .send{
+                display: flex;
+                gap: 10px;
+                align-items: center; 
+
+                svg{
+                    font-size: 1.1rem;
+                    width: 24px;
+                    cursor: pointer;
+                    color: $primaryText;
+                }
+
+                button{
+                    border: none;
+                    background-color: $primaryDark;
+                    color: $ourWhite;
+                    cursor: pointer;
+                    padding: 10px 15px;
+                    transition: 0.1s all ease-in-out;
+                    opacity: 0.8;
+                }
+                button:hover{
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}
