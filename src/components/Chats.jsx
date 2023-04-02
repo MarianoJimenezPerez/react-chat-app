@@ -14,14 +14,6 @@ const Chats = () => {
   const { currentUser } = useContext(AuthContext);
   const { data, dispatch } = useContext(ChatContext);
 
-  const handleSelect = (user) => {
-    dispatch({
-      type: "CHANGE_USER",
-      payload: user,
-    });
-    setActiveChat(user.uid);
-  };
-
   useEffect(() => {
     const getChats = () => {
       const unsub = onSnapshot(doc(db, "userChats", currentUser.uid), (doc) => {
@@ -37,11 +29,11 @@ const Chats = () => {
               payload: {},
             });
           } else {
-            dispatch({
+            /*  dispatch({
               // establece el primer chat como activo por defecto
               type: "SET_ACTIVE_INDEX",
               payload: 0,
-            });
+            }); */
 
             dispatch({
               // abre el primer chat obtenido
@@ -60,7 +52,15 @@ const Chats = () => {
     };
 
     currentUser.uid && getChats();
-  }, [currentUser.uid]);
+  }, [currentUser.uid, dispatch]);
+
+  const handleSelect = (user) => {
+    dispatch({
+      type: "CHANGE_USER",
+      payload: user,
+    });
+    setActiveChat(user.uid);
+  };
 
   return (
     <div className="chats">

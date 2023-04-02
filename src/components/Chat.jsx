@@ -59,7 +59,6 @@ const Chat = () => {
     try {
       const res = await getDoc(doc(db, "chats", combinedId));
       if (!res.exists()) {
-        console.log("entra if");
         //create a chat in chats collection
         await setDoc(doc(db, "chats", combinedId), { messages: [] });
 
@@ -94,7 +93,8 @@ const Chat = () => {
           <h2>Hi there! Welcome to Chat App</h2>
           <p>
             Looks like you first time here. Use the search bar on the left top
-            to search your friends and start to chat.
+            to search your friends and start to chat or choose one in the table
+            below
           </p>
           <table>
             <thead>
@@ -131,6 +131,10 @@ const Chat = () => {
           <FontAwesomeIcon icon={faVideo} />
           <FontAwesomeIcon icon={faUserPlus} />
           <FontAwesomeIcon icon={faEllipsisH} />
+        </div>
+        <div className="chat_mobile_advice">
+          <h3>Hi there! Looks like you are using a phone</h3>
+          <p>For the moment, this app is only avaible for desktop or tablet.</p>
         </div>
       </div>
       <Messages />
